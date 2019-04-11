@@ -2,10 +2,10 @@
   <div style="background: #f7f7f7;">
     <StoreHeader></StoreHeader>
     <div class="product">
-        <ul class="cate">
-          <li :class="curNav == data.id ? 'active ' : ''" v-for="(data,index) of datas" :data-id="data.id" :key="index" @click="pid">{{data.name}}({{data.number}})</li>
-        </ul>
-        <ul class="product_word">
+      <ul class="cate">
+        <li :class="curNav == data.id ? 'active ' : ''" v-for="(data,index) of datas" :data-id="data.id" :key="index" @click="pid">{{data.name}}({{data.number}})</li>
+      </ul>
+      <ul class="product_word">
         <li v-for="(list, index) of lists" :key='index'>
           <div class="description">
             <div>
@@ -15,7 +15,7 @@
               <p>{{list.name}}</p>
               <div class="price">
                 <p>¥{{list.price}}/{{list.kid}}</p>
-                <img src="../../../static/images/icon_arrow_down@2x.png" alt="">
+                <!--<img src="../../../static/images/icon_arrow_down@2x.png" alt="">-->
               </div>
             </div>
           </div>
