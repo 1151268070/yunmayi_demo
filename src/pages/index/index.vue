@@ -1,32 +1,11 @@
 <template>
-  <div>
-    <div class="message">
-      <div class="imgs">
-        <img src="../../../static/images/dd.png" alt="">
-      </div>
-      <div class="texts">
-        <p>杭州格燃食品有限公司</p>
-        <p class="phone">电话：18265656798</p>
-        <p class="address">地址：浙江省杭州市西湖区文三路188号</p>
-      </div>
-    </div>
-    <div class="notice">
-      <img src="../../../static/images/icon_infrom@2x.png" alt="">
-      <span>劳动节特惠，全场7折，数量有限，先到先得</span>
-    </div>
-    <div class="scan">
-      <input type="text" placeholder="搜索商品" v-model.lazy="texts">
-      <img class="icons" src="../../../static/images/common_icon_search@2x.png" alt="" @click="add">
-      <div class="scans" @click= "sys">
-        <img src="../../../static/images/common_icon_scan@2x.png" alt="">
-        <p>扫一扫</p>
-      </div>
-    </div>
+  <div style="background: #f7f7f7;">
+    <StoreHeader></StoreHeader>
     <div class="product">
-      <ul class="cate">
-        <li v-for="(data,index) of datas" :data-id="data.id" :key="index" @click="pid(data.id)">{{data.name}}</li>
-      </ul>
-      <ul class="product_word">
+        <ul class="cate">
+          <li :class="curNav == data.id ? 'active ' : ''" v-for="(data,index) of datas" :data-id="data.id" :key="index" @click="pid">{{data.name}}({{data.number}})</li>
+        </ul>
+        <ul class="product_word">
         <li v-for="(list, index) of lists" :key='index'>
           <div class="description">
             <div>
@@ -49,6 +28,7 @@
 
 <script>
 import Addit from '@/components/addit'
+import StoreHeader from '@/components/store_header'
 let Fly = require('flyio/dist/npm/wx')
 let fly = new Fly()
 export default {
@@ -56,15 +36,16 @@ export default {
     return {
       texts: '',
       datas: null,
-      lists: null
+      lists: null,
+      curNav: 0
     }
   },
   components: {
-    Addit
+    Addit,
+    StoreHeader
   },
   methods: {
     add () {
-      console.log(1111)
       console.log(this.texts)
     },
     sys () {
@@ -74,15 +55,14 @@ export default {
         }
       })
     },
-    pid (index) {
-      console.log('id是：' + index)
+    pid (e) {
+      this.curNav = e.target.dataset.id
       fly.post('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getGoodsListByCid', {
-        id: index,
+        id: this.curNav,
         page: 1,
         pageSize: 5
       })
         .then((res) => {
-          console.log(res)
           this.lists = res.data.data
         })
         .catch((err) => {
@@ -92,7 +72,6 @@ export default {
     init () {
       fly.get('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getTopCat')
         .then((res) => {
-          console.log(res)
           this.datas = res.data.data
           console.log(this.datas)
         })
@@ -100,12 +79,11 @@ export default {
           console.log(err)
         })
       fly.post('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getGoodsListByCid', {
-        id: 1,
+        id: 0,
         page: 1,
         pageSize: 5
       })
         .then((res) => {
-          console.log(res)
           this.lists = res.data.data
         })
         .catch((err) => {
@@ -122,7 +100,7 @@ export default {
 </script>
 
 <style scoped>
-  .message{
+  /**.message{
     display: flex;
     width: 100%;
     height: 203rpx;
@@ -198,14 +176,17 @@ export default {
   .scan .scans p{
     font-size: 20rpx;
     color: #888888;
-  }
+  }**/
   .product{
     width: 100%;
-    display: flex;
+    height: 100%;
+    /**display: flex;**/
     margin-top: 10px;
+    position: relative;
   }
   .product ul.cate{
     width: 33%;
+    height: 100%;
     background-color: #F5F5F5;
   }
   .product ul.cate li{
@@ -215,8 +196,18 @@ export default {
     line-height: 100rpx;
     font-size: 28rpx;
   }
+  .product ul.cate li.active{
+    background: #fff;
+    color: #E62D2D;
+  }
   .product ul.product_word{
+    position: absolute;
+    top: 0;
+    right: 0;
     flex: 1;
+    width: 67%;
+    height: 100%;
+    background: #fff;
   }
   .product ul.product_word li{
     width: 100%;
