@@ -1,6 +1,6 @@
 <template>
   <div style="background: #f7f7f7;">
-    <StoreHeader></StoreHeader>
+    <StoreHeader :store="store_data"></StoreHeader>
     <div class="product">
       <ul class="cate">
         <li :class="curNav == data.id ? 'active ' : ''" v-for="(data,index) of datas" :data-id="data.id" :key="index" @click="pid">{{data.name}}({{data.number}})</li>
@@ -13,10 +13,7 @@
             </div>
             <div class="news">
               <p>{{list.name}}</p>
-              <div class="price">
-                <p>¥{{list.price}}/{{list.kid}}</p>
-                <!--<img src="../../../static/images/icon_arrow_down@2x.png" alt="">-->
-              </div>
+              <PriceAndKid :pandk="list.priceAndKid"></PriceAndKid>
             </div>
           </div>
           <Addit></Addit>
@@ -27,6 +24,7 @@
 </template>
 
 <script>
+import PriceAndKid from '@/components/priceAndKid'
 import Addit from '@/components/addit'
 import StoreHeader from '@/components/store_header'
 let Fly = require('flyio/dist/npm/wx')
@@ -37,16 +35,26 @@ export default {
       texts: '',
       datas: null,
       lists: null,
-      curNav: 0
+      curNav: 0,
+      store_data: null
     }
   },
   components: {
     Addit,
-    StoreHeader
+    StoreHeader,
+    PriceAndKid
+  },
+  watch: {
+
+  },
+  computed: {
+    reversedMessage: function () {
+      return false
+    }
   },
   methods: {
     add () {
-      console.log(this.texts)
+      console.log(111)
     },
     sys () {
       wx.scanCode({
@@ -64,16 +72,24 @@ export default {
       })
         .then((res) => {
           this.lists = res.data.data
+          console.log(this.lists[0])
         })
         .catch((err) => {
           console.log(err)
         })
     },
     init () {
+      fly.get('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getShopDetail')
+        .then((res) => {
+          this.store_data = res.data.data
+          console.log(this.store_data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       fly.get('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getTopCat')
         .then((res) => {
           this.datas = res.data.data
-          console.log(this.datas)
         })
         .catch((err) => {
           console.log(err)

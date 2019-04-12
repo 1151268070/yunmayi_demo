@@ -4,7 +4,11 @@
       "path": "pages/store",
       "config": {
         "navigationBarTitleText": "店铺",
-        "enablePullDownRefresh": true
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-button": "/static/vant/button/index",
+          "van-search": "/static/vant/search/index"
+        }
       }
     },
     {
