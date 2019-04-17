@@ -1,34 +1,57 @@
 <template>
-  <div style="background: #f7f7f7;">
-    <StoreHeader :store="store_data"></StoreHeader>
-    <div class="product">
-      <ul class="cate">
-        <li :class="curNav == data.id ? 'active ' : ''" v-for="(data,index) of datas" :data-id="data.id" :key="index" @click="pid">{{data.name}}({{data.number}})</li>
-      </ul>
-      <ul class="product_word">
-        <li v-for="(list, index) of lists" :key='index'>
-          <div class="description">
-            <div>
-              <img :src="list.urlImg" alt="">
-            </div>
-            <div class="news">
-              <p>{{list.name}}</p>
-              <PriceAndKid :pandk="list.priceAndKid"></PriceAndKid>
-            </div>
-          </div>
-          <Addit></Addit>
-        </li>
-      </ul>
+  <div style="background: #f7f7f7">
+    <StoreHeader :store="storeData"></StoreHeader>
+    <div class="swiper">
+      <swiper autoplay="true" interval="3000">
+        <swiper-item v-for="(imgs,index) in imgUrls" :key="index">
+          <img :src="imgs" alt="" width="100%" style="background-size: 100%">
+        </swiper-item>
+      </swiper>
+    </div>
+    <van-row style="margin-top: 50px; text-align: center;">
+      <van-col span="8" @click="go">
+        <van-icon name="http://pifa.yunmayi.com/upload/2018/12/10/6740b143f11068aaa248f1122d034ade.png" size="60px" />
+        <p>金主特惠</p>
+      </van-col>
+      <van-col span="8">
+        <van-icon name="http://pifa.yunmayi.com/upload/2018/12/10/d4a3e9a5a93a279cb6c03a91cf7a8dd5.png" size="60px" />
+        <p>吃遍中国</p>
+      </van-col>
+      <van-col span="8">
+        <van-icon name="http://pifa.yunmayi.com/upload/2018/12/10/bb1960de463180784ce5a1040fac3857.png" size="60px" />
+        <p>服务承诺</p>
+      </van-col>
+    </van-row>
+    <div style="background: white; text-align: center; padding-bottom: 10px">
+      <div class="invite">
+        <image src="http://i8.yunmayi.com/upload/2019/04/01/0114b233867feaf2a9a4bff81471f7de.pngXXXXX!!!!!_700x700.jpg" mode="widthFix" width="100%"/>
+      </div>
+      <div class="explosive">
+        <image src="http://i8.yunmayi.com/upload/2018/12/17/91e8130411d4db5e8af3341b225fd783.pngXXXXX!!!!!_700x700.jpg" mode="widthFix" width="100%"/>
+      </div>
+      <div class="explosive">
+        <image src="http://i8.yunmayi.com/upload/2019/03/19/2411bbf9b1a0ee26e4cfc2238562098d.jpgXXXXX!!!!!_700x700.jpg" mode="widthFix"/>
+      </div>
+    </div>
+    <div style="width:95%; margin: 0 auto; background: white; text-align: center;">
+      <div class="handpick">
+        <image src="http://i8.yunmayi.com/upload/2018/12/10/8363a004e8ef2aee19408b83c55dfbbb.png" mode="widthFix"/>
+      </div>
+      <van-row>
+        <van-col span="8">
+          <img src="http://i8.yunmayi.com/upload/2019/01/02/b0136b63d9e60bf82b9bbe18dd930967.jpgXXXXX!!!!!_700x700.jpg" width="100%;" height="100%" mode="widthFix" style="background-size: 100%"/>
+        </van-col>
+        <van-col span="8">
+          <img src="http://i8.yunmayi.com/upload/2019/01/02/b0136b63d9e60bf82b9bbe18dd930967.jpgXXXXX!!!!!_700x700.jpg" mode="widthFix" style="background-size: 100%"/>
+        </van-col>
+      </van-row>
     </div>
   </div>
 </template>
 
 <script>
-import PriceAndKid from '@/components/priceAndKid'
-import Addit from '@/components/addit'
 import StoreHeader from '@/components/store_header'
-let Fly = require('flyio/dist/npm/wx')
-let fly = new Fly()
+import Addit from '@/components/addit'
 export default {
   data () {
     return {
@@ -36,265 +59,67 @@ export default {
       datas: null,
       lists: null,
       curNav: 0,
-      store_data: null
+      storeData: {},
+      imgUrls: [
+        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+        'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+      ]
     }
   },
   components: {
     Addit,
-    StoreHeader,
-    PriceAndKid
+    StoreHeader
   },
   watch: {
 
   },
   computed: {
-    reversedMessage: function () {
-      return false
-    }
+
   },
   methods: {
-    add () {
-      console.log(111)
-    },
-    sys () {
-      wx.scanCode({
-        success (res) {
-          console.log(res)
-        }
-      })
-    },
-    pid (e) {
-      this.curNav = e.target.dataset.id
-      fly.post('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getGoodsListByCid', {
-        id: this.curNav,
-        page: 1,
-        pageSize: 5
-      })
-        .then((res) => {
-          this.lists = res.data.data
-          console.log(this.lists[0])
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    init () {
-      fly.get('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getShopDetail')
-        .then((res) => {
-          this.store_data = res.data.data
-          console.log(this.store_data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      fly.get('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getTopCat')
-        .then((res) => {
-          this.datas = res.data.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      fly.post('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getGoodsListByCid', {
-        id: 0,
-        page: 1,
-        pageSize: 5
-      })
-        .then((res) => {
-          this.lists = res.data.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    go () {
+      this.$router.push('/pages/login')
     }
   },
 
   mounted () {
-    this.init()
+
   }
 
 }
 </script>
 
 <style scoped>
-  /**.message{
-    display: flex;
+  .swiper{
     width: 100%;
-    height: 203rpx;
+    height: 300rpx;
+    padding: 0 20px;
   }
-  .message .imgs{
-    width: 25%;
-    height: 100px;
-  }
-  .message .imgs img{
-    width: 160rpx;
-    height: 160rpx;
-    background-size: 100%;
-    margin-left: 20px;
-  }
-  .message .texts{
-    flex: 1;
-  }
-  .texts p{
-    padding-left: 30px;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #1F1F1F;
-  }
-  .texts p.phone, .texts p.address{
-    font-size: 14px;
-    color: #888888
-  }
-  .notice{
-    padding-left: 20px;
-  }
-  .notice img{
-    width: 36rpx;
-    height: 38rpx;
-    background-size: 100%;
-  }
-  .notice span{
-    font-size: 14px;
-    color: #E62D2D;
-    padding-left: 10px;
-  }
-  .scan{
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 20px;
-  }
-  .scan input{
-    width: 500rpx;
-    height: 70rpx;
-    background: #F5F5F5;
-    padding-left: 40px;
-    font-size: 16px;
-  }
-  .scan .icons{
-    width: 42rpx;
-    height: 42rpx;
-    background-size: 100%;
-    position: absolute;
-    top: 20%;
-    left: 8%;
-  }
-  .scan .scans{
-    width: 72rpx;
-    height: 70rpx;
-    position: absolute;
-    right: 4%;
-    top: 0;
-    text-align: center;
-  }
-  .scan .scans img{
-    width: 42rpx;
-    height: 42rpx;
-  }
-  .scan .scans p{
-    font-size: 20rpx;
-    color: #888888;
-  }**/
-  .product{
-    width: 100%;
-    height: 100%;
-    /**display: flex;**/
+  .invite{
+    width: 95%;
+    margin: 0 auto;
     margin-top: 10px;
-    position: relative;
   }
-  .product ul.cate{
-    width: 33%;
-    height: 100%;
-    background-color: #F5F5F5;
+  .explosive{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 15px;
   }
-  .product ul.cate li{
+  .spring{
     width: 100%;
-    height: 100rpx;
-    text-align: center;
-    line-height: 100rpx;
-    font-size: 28rpx;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
   }
-  .product ul.cate li.active{
+  .vessel{
+    width: 49%;
+    min-height: 185px;
     background: #fff;
-    color: #E62D2D;
+    margin-bottom: 5px;
+    border-radius: 10px;
   }
-  .product ul.product_word{
-    position: absolute;
-    top: 0;
-    right: 0;
-    flex: 1;
-    width: 67%;
-    height: 100%;
-    background: #fff;
+  .vessel img{
   }
-  .product ul.product_word li{
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 25px;
-  }
-  .product ul.product_word .description{
-    width: 100%;
-    display: flex;
-  }
-  .product_word .description img{
-    width: 120rpx;
-    height: 120rpx;
-    background-size: 100%;
-  }
-  .product_word .description .news{
-    flex: 1;
-    padding: 0px 10px;
-    font-size: 28rpx;
-  }
-  .product_word .description .news .price{
-    width: 100%;
-    display: flex;
-    margin-top: 10px;
-  }
-  .product_word .description .news .price p{
-    font-size: 28rpx;
-    color: #E62D2D;
-  }
-  .product_word .description .news .price img{
-    width: 32rpx;
-    height: 18rpx;
-    background-size: 100%;
-    padding-top: 10rpx;
-    padding-left: 10rpx;
-  }
-  /**.product_word .cart_option{
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .product_word .cart_option .operate a{
-    float: left;
-    width: 60rpx;
-    height: 60rpx;
-    border: 1px solid #cccccc;
-    font-size: 18px;
-    text-align: center;
-    line-height: 60rpx;
 
-  }
-  .product_word .cart_option .operate p{
-    float: left;
-    width: 88rpx;
-    height: 60rpx;
-    text-align: center;
-    border-top: 1px solid #CCCCCC;
-    border-bottom: 1px solid #CCCCCC;
-    line-height: 60rpx;
-    font-size: 28rpx;
-  }
-  .product_word .cart_option .joins a{
-    float: left;
-    width: 200rpx;
-    height: 64rpx;
-    background: #E62D2D;
-    margin-left: 30rpx;
-    line-height: 64rpx;
-    border-radius: 5px;
-    text-align: center;
-    color: #ffffff;
-    font-size: 28rpx;
-  }**/
 </style>

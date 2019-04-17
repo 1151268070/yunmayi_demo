@@ -3,32 +3,136 @@
     {
       "path": "pages/store",
       "config": {
-        "navigationBarTitleText": "店铺",
+        "navigationBarTitleText": "云蚂蚁商城",
         "enablePullDownRefresh": true,
         "usingComponents": {
           "van-button": "/static/vant/button/index",
-          "van-search": "/static/vant/search/index"
+          "van-search": "/static/vant/search/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-tabbar": "/static/vant/tabbar/index",
+          "van-tabbar-item": "/static/vant/tabbar-item/index"
         }
       }
     },
     {
-      "path": "pages/cart",
+      "path": "pages/order",
       "config": {
-        "navigationBarTitleText": "购物车",
+        "navigationBarTitleText": "蚂蚁商城订单",
         "enablePullDownRefresh": true
       }
     },
     {
       "path": "pages/mys",
       "config": {
-        "navigationBarTitleText": "我的",
+        "navigationBarTitleText": "我的云蚂蚁",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-icon": "/static/vant/icon/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-button": "/static/vant/button/index"
+        }
+      }
+    },
+    {
+      "path": "pages/site",
+      "config": {
+        "navigationBarTitleText": "我的地址",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-icon": "/static/vant/icon/index",
+          "van-cell": "/static/vant/cell/index",
+          "van-cell-group": "/static/vant/cell-group/index",
+          "van-button": "/static/vant/button/index"
+        }
+      }
+    },
+    {
+      "path": "pages/address",
+      "config": {
+        "navigationBarTitleText": "新增地址",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-icon": "/static/vant/icon/index",
+          "van-area": "/static/vant/area/index",
+          "van-popup": "/static/vant/popup/index"
+        }
+      }
+    },
+    {
+      "path": "pages/login",
+      "config": {
+        "navigationBarTitleText": "登录",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-field": "/static/vant/field/index",
+          "van-cell-group": "/static/vant/cell-group/index",
+          "van-button": "/static/vant/button/index"
+        }
+      }
+    },
+    {
+      "path": "pages/coupon",
+      "config": {
+        "navigationBarTitleText": "我的购物券",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index"
+        }
+      }
+    },
+    {
+      "path": "pages/gold",
+      "config": {
+        "navigationBarTitleText": "蚂蚁金币",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-cell": "/static/vant/cell/index",
+          "van-cell-group": "/static/vant/cell-group/index"
+        }
+      }
+    },
+    {
+      "path": "pages/preference",
+      "config": {
+        "navigationBarTitleText": "金主特惠",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-card": "/static/vant/card/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-tag": "/static/vant/tag/index"
+        }
+      }
+    },
+    {
+      "path": "pages/commission",
+      "config": {
+        "navigationBarTitleText": "我的佣金",
+        "enablePullDownRefresh": true,
+        "usingComponents":{
+          "van-nav-bar": "/static/vant/nav-bar/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index"
+        }
+      }
+    },
+    {
+      "path": "pages/explain",
+      "config": {
+        "navigationBarTitleText": "用户注册及使用APP隐私协议",
         "enablePullDownRefresh": true
       }
     }
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#f7f7f7",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
@@ -39,13 +143,13 @@
     "borderStyle": "white",
 
     "list": [{
-      "text": "店铺",
+      "text": "商城",
       "pagePath": "pages/store",
       "iconPath": "/static/tabs/home_icon_store_normal@2x.png",
       "selectedIconPath": "/static/tabs/home_icon_store_selected@2x.png"
     }, {
-      "text": "购物车",
-      "pagePath": "pages/cart",
+      "text": "订单",
+      "pagePath": "pages/order",
       "iconPath": "/static/tabs/home_icon_cart_normal@2x.png",
       "selectedIconPath": "/static/tabs/home_icon_cart_selected@2x.png"
     }, {
@@ -56,17 +160,17 @@
     }],
 
     "items": [{
-      "name": "首页",
+      "name": "云蚂蚁商城",
       "pagePath": "pages/store",
       "icon": "/static/tabs/home_icon_store_normal@2x.png",
       "activeIcon": "/static/tabs/home_icon_store_selected@2x.png"
     }, {
-      "name": "购物车",
-      "pagePath": "pages/cart",
+      "name": "订单",
+      "pagePath": "pages/order",
       "icon": "/static/tabs/home_icon_cart_normal@2x.png",
       "activeIcon": "/static/tabs/home_icon_cart_selected@2x.png"
     }, {
-      "text": "我的",
+      "text": "我的云蚂蚁",
       "pagePath": "pages/mys",
       "iconPath": "/static/tabs/home_icon_mine_normal@2x.png",
       "selectedIconPath": "/static/tabs/home_icon_mine_selected@2x.png"
