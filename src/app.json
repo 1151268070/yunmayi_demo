@@ -118,7 +118,21 @@
           "van-nav-bar": "/static/vant/nav-bar/index",
           "van-icon": "/static/vant/icon/index",
           "van-row": "/static/vant/row/index",
-          "van-col": "/static/vant/col/index"
+          "van-col": "/static/vant/col/index",
+          "van-notice-bar": "/static/vant/notice-bar/index",
+          "van-tabbar": "/static/vant/tabbar/index",
+          "van-button": "/static/vant/button/index",
+          "van-popup": "/static/vant/popup/index"
+        }
+      }
+    },
+    {
+      "path": "pages/generalize",
+      "config": {
+        "navigationBarTitleText": "推广商品",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-card": "/static/vant/card/index"
         }
       }
     },
