@@ -13,18 +13,18 @@
     </van-row>
     <scroll-view scroll-x="true">
        <div class="scroll_x">
-          <div>生鲜水果</div>
-          <div>地方特产</div>
-          <div>食品零食</div>
-          <div>美容洗护</div>
-          <div>服装服饰</div>
-          <div>家居生活</div>
-          <div>酒水饮料</div>
-          <div>保健养生</div>
-          <div>云蚂蚁定制</div>
-          <div>原装进口</div>
-          <div>粮油调味</div>
-          <div>玩具乐园</div>
+          <p>生鲜水果</p>
+          <p>地方特产</p>
+          <p>食品零食</p>
+          <p>美容洗护</p>
+          <p>服装服饰</p>
+          <p>家居生活</p>
+          <p>酒水饮料</p>
+          <p>保健养生</p>
+          <p>云蚂蚁定制</p>
+          <p>原装进口</p>
+          <p>粮油调味</p>
+          <p>玩具乐园</p>
        </div>
     </scroll-view>
   </div>
@@ -66,11 +66,11 @@
     display: flex;
     flex-direction: row;
   }
-  .scroll_x>div{
+  .scroll_x > p{
     text-align: center;
     width: 200px;
     padding: 0 10px;
-    height: 200rpx;
+    height: 30px;
     font-size: 28rpx;
     line-height: 28rpx;
   }

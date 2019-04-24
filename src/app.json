@@ -137,6 +137,22 @@
       }
     },
     {
+      "path": "pages/detail",
+      "config": {
+        "navigationBarTitleText": "商品详情",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-card": "/static/vant/card/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-button": "/static/vant/button/index",
+          "van-goods-action": "/static/vant/goods-action/index",
+          "van-goods-action-icon": "/static/vant/goods-action-icon/index",
+          "van-goods-action-button": "/static/vant/goods-action-button/index"
+        }
+      }
+    },
+    {
       "path": "pages/explain",
       "config": {
         "navigationBarTitleText": "用户注册及使用APP隐私协议",

@@ -38,7 +38,7 @@
         <img class="img" src="http://i8.yunmayi.com/upload/2018/12/10/8363a004e8ef2aee19408b83c55dfbbb.png" mode="widthFix"/>
       </div>
       <van-row>
-        <van-col span="12">
+        <van-col span="12" @click="jump">
           <img class="img" src="http://i8.yunmayi.com/upload/2019/01/02/b0136b63d9e60bf82b9bbe18dd930967.jpgXXXXX!!!!!_700x700.jpg" mode="widthFix"/>
         </van-col>
         <van-col span="12">
@@ -86,6 +86,9 @@ export default {
   methods: {
     go () {
       this.$router.push('/pages/login')
+    },
+    jump () {
+      this.$router.push('/pages/detail')
     }
   },
 
