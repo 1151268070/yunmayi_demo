@@ -31,7 +31,7 @@
               <span>0</span>
             </van-col>
           </van-row>
-          <div class="bracket">
+          <div class="bracket" @click="invite">
             <p>有0个普通好友未充值哦，再加把劲哦</p>
             <i class="triangles"></i>
           </div>
@@ -141,6 +141,9 @@
     methods: {
       jump () {
         this.$router.push('/pages/generalize')
+      },
+      invite () {
+        this.$router.push('/pages/inviteFriends')
       },
       popup_show () {
         this.show = true

@@ -108,4 +108,7 @@
     font-size: 26rpx;
     padding: 0;
   }
+  .van-goods-action--safe{
+    padding: 0;
+  }
 </style>

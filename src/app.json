@@ -153,6 +153,40 @@
       }
     },
     {
+      "path": "pages/search",
+      "config": {
+        "navigationBarTitleText": "商城商品搜索",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-button": "/static/vant/button/index",
+          "van-search": "/static/vant/search/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-tabbar": "/static/vant/tabbar/index",
+          "van-tabbar-item": "/static/vant/tabbar-item/index"
+        }
+      }
+    },
+    {
+      "path": "pages/inviteFriends",
+      "config": {
+        "navigationBarTitleText": "金主好友",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-button": "/static/vant/button/index",
+          "van-search": "/static/vant/search/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-tabbar": "/static/vant/tabbar/index",
+          "van-tabbar-item": "/static/vant/tabbar-item/index",
+          "van-cell": "/static/vant/cell/index",
+          "van-cell-group": "/static/vant/cell-group/index"
+        }
+      }
+    },
+    {
       "path": "pages/explain",
       "config": {
         "navigationBarTitleText": "用户注册及使用APP隐私协议",

@@ -5,7 +5,7 @@
         <van-tabbar-item icon="apps-o">分类</van-tabbar-item>
       </van-col>
       <van-col span="18">
-        <van-search placeholder="请输入关键字搜索"/>
+        <van-search placeholder="请输入关键字搜索" @search="onSearch"/>
       </van-col>
       <van-col>
         <van-tabbar-item icon="shopping-cart-o" info="9">购物车</van-tabbar-item>
@@ -52,6 +52,11 @@
           this.Store_data = v
         },
         deep: true
+      }
+    },
+    methods: {
+      onSearch () {
+        this.$router.push('/pages/search')
       }
     }
   }
