@@ -1,7 +1,12 @@
 <template>
   <div>
     <StoreHeader :store="storeData"></StoreHeader>
-
+    <van-row>
+      <van-col span="12">555</van-col>
+      <van-col span="12">555</van-col>
+      <van-col span="12">555</van-col>
+      <van-col span="12">555</van-col>
+    </van-row>
   </div>
 </template>
 

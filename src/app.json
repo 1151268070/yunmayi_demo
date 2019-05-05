@@ -20,8 +20,32 @@
       "path": "pages/order",
       "config": {
         "navigationBarTitleText": "蚂蚁商城订单",
-        "enablePullDownRefresh": true
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-tab": "/static/vant/tab/index",
+          "van-tabs": "/static/vant/tabs/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-button": "/static/vant/button/index"
+        }
       }
+    },
+    {
+      "path": "pages/order-detail",
+      "config": {
+        "navigationBarTitleText": "订单详情",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-cell": "/static/vant/cell/index",
+          "van-cell-group": "/static/vant/cell-group/index",
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-icon": "/static/vant/icon/index",
+          "van-card": "/static/vant/card/index"
+        }
+      },
+      "route": "pages/order/detail"
     },
     {
       "path": "pages/mys",
@@ -182,6 +206,18 @@
           "van-tabbar": "/static/vant/tabbar/index",
           "van-tabbar-item": "/static/vant/tabbar-item/index",
           "van-cell": "/static/vant/cell/index",
+          "van-cell-group": "/static/vant/cell-group/index"
+        }
+      }
+    },
+    {
+      "path": "pages/register",
+      "config": {
+        "navigationBarTitleText": "注册云蚂蚁",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-button": "/static/vant/button/index",
+          "van-field": "/static/vant/field/index",
           "van-cell-group": "/static/vant/cell-group/index"
         }
       }

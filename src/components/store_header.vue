@@ -7,7 +7,7 @@
       <van-col span="18">
         <van-search placeholder="请输入关键字搜索" @search="onSearch"/>
       </van-col>
-      <van-col>
+      <van-col span="3">
         <van-tabbar-item icon="shopping-cart-o" info="9">购物车</van-tabbar-item>
       </van-col>
     </van-row>

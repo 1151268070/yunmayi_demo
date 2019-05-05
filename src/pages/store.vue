@@ -13,7 +13,7 @@
         <van-icon name="http://pifa.yunmayi.com/upload/2018/12/10/6740b143f11068aaa248f1122d034ade.png" size="60px" />
         <p>金主特惠</p>
       </van-col>
-      <van-col span="8">
+      <van-col span="8" @click="registers">
         <van-icon name="http://pifa.yunmayi.com/upload/2018/12/10/d4a3e9a5a93a279cb6c03a91cf7a8dd5.png" size="60px" />
         <p>吃遍中国</p>
       </van-col>
@@ -86,6 +86,9 @@ export default {
   methods: {
     go () {
       this.$router.push('/pages/login')
+    },
+    registers () {
+      this.$router.push('/pages/register')
     },
     jump () {
       this.$router.push('/pages/detail')
