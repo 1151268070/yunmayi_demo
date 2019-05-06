@@ -1,15 +1,11 @@
 <template>
     <div>
       <div class="item">
-        <van-row>
-          <van-col span="4" style="text-align: center;">
-            <van-icon name="location-o" size="30px" color="#FA3603"/>
-          </van-col>
-          <van-col span="20" class="address">
-            <p>测试 <span> 15279975523</span></p>
-            <p>杭州市拱墅区平安雅苑</p>
-          </van-col>
-        </van-row>
+        <p>订单编号：<span>550023543</span></p>
+        <p> 收 货 人 ：<span>测试</span></p>
+        <p>联系方式：<span>15279975523</span></p>
+        <p>收货地址：<span>杭州市拱墅区平安雅苑</span></p>
+        <p>订单时间：<span>2019-03-04 10:33:47</span></p>
       </div>
       <div class="item not_border">
         <van-card
@@ -22,45 +18,38 @@
             <p>颜色：白色</p>
             <p>尺码：xxr</p>
           </view>
+          <view slot="footer">
+            <van-button type="primary" round size="mini" @click="logistics">查看物流</van-button>
+          </view>
         </van-card>
       </div>
       <div class="item">
-        <van-row class="price">
-          <van-col span="12">
-            <p class="left">价格：</p>
-          </van-col>
-          <van-col span="12">
-            <p class="right">¥ 90 * 1</p>
-          </van-col>
-          <van-col span="12">
-            <p class="left">总价：</p>
-          </van-col>
-          <van-col span="12">
-            <p class="right">¥ 90.00</p>
-          </van-col>
-        </van-row>
-      </div>
-      <div class="item">
-        <p>订单编号：<span>550023543</span></p>
-        <p> 收 货 人：<span>测试</span></p>
-        <p>联系方式：<span>15279975523</span></p>
-        <p>收货地址：<span>杭州市拱墅区平安雅苑</span></p>
-        <p>订单时间：<span>2019-03-04 10:33:47</span></p>
+        <van-cell title="价格" value="¥90*1"/>
+        <van-cell title="总价" value="¥ 90.00"/>
       </div>
       <div class="item not_border">
-        <van-row>
-          <van-col span="8" style="margin-bottom: 10px;">
-            <img src="http://i8.yunmayi.com/upload/2019/02/28/e52cb54dc307492a90f5bf2f41d4c16e.jpegXXXXX!!!!!_160x160.jpg" class="imgs" mode="scaleToFill">
-          </van-col>
-          <van-col span="16"></van-col>
-        </van-row>
+        <van-cell title="订单总金额" value="¥ 90.00"/>
+        <van-cell title="支付方式" value="支付宝支付"/>
+        <van-cell title="支付状况" value="未付款"/>
+        <van-cell title="优惠券" value="¥ 0.00"/>
+        <van-cell title="备注" value=" "/>
+        <van-cell title="实付" value="¥ 90.00" class="text_color"/>
+        <van-cell title="客服热线" value="0571-86908200"/>
       </div>
     </div>
 </template>
 
 <script>
   export default {
-    name: 'order-detail'
+    name: 'order-detail',
+    data () {
+
+    },
+    methods: {
+      logistics () {
+        this.$router.push('/pages/logistics')
+      }
+    }
   }
 </script>
 
@@ -76,29 +65,21 @@
 .item .address p span{
   color: gray;
 }
+.item>h3{
+  padding-left: 15px;
+  font-size: 16px;
+}
 .item>p{
-  padding-left: 10px;
+  padding-left: 15px;
   font-size: 14px;
 }
 .item>p>span{
   color: gray;
 }
-.price p{
-  font-size: 14px;
-  color: gray;
-}
-.price .left{
-  padding-left: 10px;
-}
-.price .right{
-  text-align: right;
-  padding-right: 10px;
-}
 .not_border{
   border: 0;
 }
-.imgs{
-  width: 88px;
-  height: 88px;
+.text_color{
+  color: #ff0000;
 }
 </style>

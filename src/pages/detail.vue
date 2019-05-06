@@ -1,8 +1,8 @@
 <template>
     <div style="position: relative;">
-      <div class="swiper">
-        <swiper autoplay="true" interval="3000">
-          <swiper-item v-for="(imgs,index) in imgUrls" :key="index">
+      <div class="swipers">
+        <swiper autoplay="true" interval="3000" style="height: 100%;">
+          <swiper-item v-for="(imgs,index) in imgUrls" :key="index" style="height: 100%;">
             <img :src="imgs" alt="" class="img" mode="widthFix">
           </swiper-item>
         </swiper>
@@ -56,10 +56,9 @@
 </script>
 
 <style scoped>
-  .swiper{
+  .swipers{
     width: 100%;
     height: 300px;
-    margin-bottom: 20px;
   }
   .img{
     width: 100%;

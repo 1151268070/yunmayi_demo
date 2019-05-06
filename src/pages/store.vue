@@ -1,10 +1,11 @@
 <template>
-  <div style="background: #f7f7f7">
+  <div>
     <StoreHeader :store="storeData"></StoreHeader>
+    <div class="strut"></div>
     <div class="swiper">
       <swiper autoplay="true" interval="3000">
         <swiper-item v-for="(imgs,index) in imgUrls" :key="index">
-          <img :src="imgs" alt="" class="img" style="background-size: 100%" mode="widthFix">
+          <img :src="imgs" class="img" mode="scaleToFill">
         </swiper-item>
       </swiper>
     </div>
@@ -65,7 +66,46 @@ export default {
       datas: null,
       lists: null,
       curNav: 0,
-      storeData: {},
+      storeData: {
+        data: [
+          {
+            system_name: '生鲜水果'
+          },
+          {
+            system_name: '地方特产'
+          },
+          {
+            system_name: '食品零食'
+          },
+          {
+            system_name: '美容洗护'
+          },
+          {
+            system_name: '服装服饰'
+          },
+          {
+            system_name: '家居生活'
+          },
+          {
+            system_name: '酒水饮料'
+          },
+          {
+            system_name: '保健养生'
+          },
+          {
+            system_name: '云蚂蚁定制'
+          },
+          {
+            system_name: '原装进口'
+          },
+          {
+            system_name: '粮油调味'
+          },
+          {
+            system_name: '玩具乐园'
+          }
+        ]
+      },
       imgUrls: [
         'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
         'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
@@ -103,6 +143,9 @@ export default {
 </script>
 
 <style scoped>
+  .strut{
+    height: 88px;
+  }
   .swiper{
     width: 100%;
     height: 300rpx;

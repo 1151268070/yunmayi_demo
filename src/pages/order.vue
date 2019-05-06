@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-tabs :active="active">
+    <van-tabs :active="active" animated>
       <van-tab title="全部">
         <div class="list">
           <div class="item">

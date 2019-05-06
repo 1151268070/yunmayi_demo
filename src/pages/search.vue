@@ -1,6 +1,7 @@
 <template>
   <div>
     <StoreHeader :store="storeData"></StoreHeader>
+    <div class="strut"></div>
     <van-row>
       <van-col span="12">555</van-col>
       <van-col span="12">555</van-col>
@@ -26,5 +27,7 @@
 </script>
 
 <style scoped>
-
+  .strut{
+    height: 88px;
+  }
 </style>

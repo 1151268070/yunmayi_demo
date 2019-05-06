@@ -12,7 +12,10 @@
           "van-row": "/static/vant/row/index",
           "van-col": "/static/vant/col/index",
           "van-tabbar": "/static/vant/tabbar/index",
-          "van-tabbar-item": "/static/vant/tabbar-item/index"
+          "van-tabbar-item": "/static/vant/tabbar-item/index",
+          "van-popup": "/static/vant/popup/index",
+          "van-badge": "/static/vant/badge/index",
+          "van-badge-group": "/static/vant/badge-group/index"
         }
       }
     },
@@ -42,10 +45,23 @@
           "van-row": "/static/vant/row/index",
           "van-col": "/static/vant/col/index",
           "van-icon": "/static/vant/icon/index",
-          "van-card": "/static/vant/card/index"
+          "van-card": "/static/vant/card/index",
+          "van-button": "/static/vant/button/index"
         }
       },
       "route": "pages/order/detail"
+    },
+    {
+      "path": "pages/logistics",
+      "config": {
+        "navigationBarTitleText": "物流详情",
+        "enablePullDownRefresh": true,
+        "usingComponents": {
+          "van-row": "/static/vant/row/index",
+          "van-col": "/static/vant/col/index",
+          "van-steps": "/static/vant/steps/index"
+        }
+      }
     },
     {
       "path": "pages/mys",
@@ -188,7 +204,10 @@
           "van-row": "/static/vant/row/index",
           "van-col": "/static/vant/col/index",
           "van-tabbar": "/static/vant/tabbar/index",
-          "van-tabbar-item": "/static/vant/tabbar-item/index"
+          "van-tabbar-item": "/static/vant/tabbar-item/index",
+          "van-popup": "/static/vant/popup/index",
+          "van-badge": "/static/vant/badge/index",
+          "van-badge-group": "/static/vant/badge-group/index"
         }
       }
     },
