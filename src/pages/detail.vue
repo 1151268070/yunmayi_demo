@@ -33,7 +33,7 @@
         <van-goods-action safe-area-inset-bottom="false">
           <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
           <van-goods-action-icon icon="cart-o" text="购物车" @click="Cart" />
-          <van-goods-action-button text="加入购物车" type="warning" @click="onClickButton"/>
+          <van-goods-action-button text="加入购物车" type="warning" @click="onClickButton({id: 1, name: '绿树果黄金蜜哈密瓜新鲜水果缅甸密瓜包邮黄金蜜瓜黄河甜瓜哈蜜瓜',imgUrl: 'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640', price: 45.00})"/>
           <van-goods-action-button text="立即购买" @click="buy" />
         </van-goods-action>
       </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   export default {
     name: 'detail',
     data () {
@@ -51,6 +52,9 @@
           'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
         ]
       }
+    },
+    methods: {
+      ...mapActions(['onClickButton'])
     }
   }
 </script>

@@ -144,7 +144,7 @@ export default {
 
 <style scoped>
   .strut{
-    height: 88px;
+    height: 105px;
   }
   .swiper{
     width: 100%;

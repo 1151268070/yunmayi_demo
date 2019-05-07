@@ -11,15 +11,11 @@
         </van-col>
         <van-col span="3">
           <p style="margin-top: 10px"></p>
-          <van-tabbar-item icon="shopping-cart-o" info="9">购物车</van-tabbar-item>
+          <van-tabbar-item icon="shopping-cart-o" info="9" @click="Cart">购物车</van-tabbar-item>
         </van-col>
       </van-row>
     </div>
-    <div>
-      <scroll-view scroll-x="true">
-        <p v-for="(data, index) in Store_data.data" :key="index" class="scroll_x">{{data.system_name}}</p>
-      </scroll-view>
-    </div>
+    <Scroll :system="Store_data"></Scroll>
     <div>
       <van-popup :show="show" position="left" @close="onClose">
         <van-badge-group :active="num">
@@ -31,6 +27,7 @@
 </template>
 
 <script>
+  import Scroll from '@/components/scroll'
   export default {
     name: 'store_header',
     props: {
@@ -47,6 +44,9 @@
         show: false,
         num: -1
       }
+    },
+    components: {
+      Scroll
     },
     watch: {
       store: {
@@ -70,6 +70,9 @@
       ok (index) {
         console.log(index)
         this.num = index
+      },
+      Cart () {
+        this.$router.push('/pages/cart')
       }
     }
   }
@@ -77,6 +80,7 @@
 
 <style scoped>
   .store_header{
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -86,16 +90,6 @@
   .s_header{
     height: 200px;
     position: relative;
-  }
-  .scroll_x{
-    display: inline-block;
-    white-space: nowrap;
-    text-align: center;
-    width: 60px;
-    padding: 5px 5px;
-    height: 30px;
-    font-size: 28rpx;
-    line-height: 30px;
   }
 
 </style>
