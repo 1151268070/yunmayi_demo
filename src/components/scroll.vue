@@ -1,7 +1,7 @@
 <template>
     <div>
         <scroll-view scroll-x="true" style="white-space: nowrap; display: inline-block;">
-          <p v-for="(data, index) in data1.data" :key="index" class="scroll_x">{{data.system_name}}</p>
+          <p v-for="(data, index) in system.data" :key="index" class="scroll_x">{{data.system_name}}</p>
         </scroll-view>
     </div>
 </template>
@@ -9,27 +9,27 @@
 <script>
   export default {
     name: 'scroll',
-    props: {
-      system: {
-        type: Object,
-        default () {
-          return {}
-        }
-      }
-    },
+    // props: {
+    //   system: {
+    //     type: Object,
+    //     default () {
+    //       return {}
+    //     }
+    //   }
+    // },
+    props: ['system'],
     data () {
       return {
-        data1: this.system
       }
     },
     watch: {
-      system: {
-        handler (v) {
-          this.data1 = v
-          console.log(this.data1)
-        },
-        deep: true
-      }
+      // system: {
+      //   handler (v) {
+      //     this.data1 = v
+      //     console.log(this.data1)
+      //   },
+      //   deep: true
+      // }
     }
   }
 </script>

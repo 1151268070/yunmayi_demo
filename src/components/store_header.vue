@@ -11,15 +11,15 @@
         </van-col>
         <van-col span="3">
           <p style="margin-top: 10px"></p>
-          <van-tabbar-item icon="shopping-cart-o" info="9" @click="Cart">购物车</van-tabbar-item>
+          <van-tabbar-item icon="shopping-cart-o" :info="info.length" @click="Cart">购物车</van-tabbar-item>
         </van-col>
       </van-row>
     </div>
-    <Scroll :system="Store_data"></Scroll>
+    <Scroll :system="store"></Scroll>
     <div>
       <van-popup :show="show" position="left" @close="onClose">
         <van-badge-group :active="num">
-          <van-badge v-for="(data, index) in Store_data.data" :key="index" :title="data.system_name" @click="ok(index)"/>
+          <van-badge v-for="(data, index) in store.data" :key="index" :title="data.system_name" @click="ok(index)"/>
         </van-badge-group>
       </van-popup>
     </div>
@@ -30,17 +30,23 @@
   import Scroll from '@/components/scroll'
   export default {
     name: 'store_header',
-    props: {
-      store: {
-        type: Object,
-        default () {
-          return {}
-        }
-      }
-    },
+    props: ['store', 'info'],
+    // props: {
+    //   store: {
+    //     type: Object,
+    //     default () {
+    //       return {}
+    //     }
+    //   },
+    //   info: {
+    //     type: Object,
+    //     default () {
+    //       return {}
+    //     }
+    //   }
+    // },
     data () {
       return {
-        Store_data: this.store,
         show: false,
         num: -1
       }
@@ -48,14 +54,20 @@
     components: {
       Scroll
     },
-    watch: {
-      store: {
-        handler (v) {
-          this.Store_data = v
-        },
-        deep: true
-      }
-    },
+    // watch: {
+    //   store: {
+    //     handler (v) {
+    //       this.Store_data = v
+    //     },
+    //     deep: true
+    //   },
+    //   info: {
+    //     handler (v) {
+    //       this.car = v
+    //     },
+    //     deep: true
+    //   }
+    // },
     methods: {
       onSearch () {
         this.$router.push('/pages/search')

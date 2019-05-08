@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StoreHeader :store="storeData"></StoreHeader>
+    <StoreHeader :store="storeData" :info="cur"></StoreHeader>
     <div class="strut"></div>
     <div class="swiper">
       <swiper autoplay="true" interval="3000">
@@ -59,6 +59,7 @@
 <script>
 import StoreHeader from '@/components/store_header'
 import Addit from '@/components/addit'
+import {mapState} from 'vuex'
 export default {
   data () {
     return {
@@ -121,7 +122,7 @@ export default {
 
   },
   computed: {
-
+    ...mapState(['cur'])
   },
   methods: {
     go () {

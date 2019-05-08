@@ -12,9 +12,8 @@
       </div>
       <div v-if="!cur.length">购物车空空的</div>
       <div v-else class="list">
-        <van-checkbox-group>
-          <div v-for="(item, index) in cur" :key="index">
-          <van-checkbox>
+        <div v-for="(item, index) in cur" :key="index">
+          <van-checkbox :value="checkboxList" @change="onChange">
             <van-card
               :title="item.name"
               :price="item.price"
@@ -25,30 +24,44 @@
                 <span>M</span>
               </view>
               <view slot="footer">
-                <van-stepper min="1" :value="item.num" integer @plus="addNum(index)" @minus="reduceNum(index)"/>
+                <van-stepper min="1" :value="item.num" integer @plus="addNum({id: item.id})" @minus="reduceNum({id: item.id})"/>
               </view>
             </van-card>
           </van-checkbox>
-          </div>
-        </van-checkbox-group>
+        </div>
+      </div>
+      <div>
+        <van-submit-bar
+          :price="getGoodtotal * 100"
+          button-text="结算"
+        >
+          <van-checkbox class="checkBox" :value="isCheckedAll" @change="onCheckedAll">全选</van-checkbox>
+        </van-submit-bar>
       </div>
     </div>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions, mapGetters} from 'vuex'
   export default {
     name: 'cart',
     data () {
       return {
-
+        checked: true
       }
     },
     methods: {
-      ...mapActions(['addNum', 'reduceNum'])
+      ...mapActions(['addNum', 'reduceNum', 'onChange', 'onCheckedAll']),
+      onChange () {
+        this.checked = !this.checked
+      }
     },
     computed: {
-      ...mapState(['cur'])
+      ...mapState(['cur', 'checkboxList', 'isCheckedAll']),
+      ...mapGetters(['getGoodtotal'])
+    },
+    created () {
+      // this.initCur()
     }
   }
 </script>
@@ -73,5 +86,8 @@
   .list .item{
     padding: 16px;
 
+  }
+  .checkBox{
+    padding-left: 20px;
   }
 </style>
