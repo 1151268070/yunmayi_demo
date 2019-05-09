@@ -11,12 +11,14 @@ const state = {
   isCheckedAll: false
 }
 const actions = {
-  // initCur ({commit}) {
-  //   setTimeout(() => {
-  //     let results = JSON.parse(localStorage.cur || '[]')
-  //     commit('initCur', results)
-  //   }, 300)
-  // },
+  initCur ({commit}, params) {
+    setTimeout(() => {
+      let result = 'ok'
+      if (result === 'ok') {
+        commit('initCur', params)
+      }
+    }, 300)
+  },
   onClickButton ({commit}, params) {
     setTimeout(() => {
       let result = 'ok'
@@ -55,8 +57,10 @@ const actions = {
   }
 }
 const mutations = {
-  initCur (state, cur) {
-    state.cur = cur
+  initCur (state) {
+    state.cur.forEach((item) => {
+      item.checked = false
+    })
   },
   onClickButton (state, { id, name, imgUrl, price }) {
     let isOwn = state.cur.some(function (item) {
@@ -90,42 +94,44 @@ const mutations = {
       }
     }
   },
-  onChange (state) {
-    var len = state.cur.length
-    var list = state.checkboxList.length
-    if (len === list) {
+  //  单选
+  onChange (state, i) {
+    state.cur[i].checked = !state.cur[i].checked
+    // if (state.cur[i].checked) {
+    //   state.checkboxList.push(state.cur[i])
+    // } else {
+    //   return false
+    // }
+    if (state.cur.every(item => item.checked) === true) {
       state.isCheckedAll = true
     } else {
       state.isCheckedAll = false
     }
   },
+  // 全选
   onCheckedAll (state) {
-    if (state.isCheckedAll) {
-      state.checkboxList = []
-      state.cur.forEach((item) => {
+    state.isCheckedAll = !state.isCheckedAll
+    state.checkboxList = []
+    state.cur.forEach((item) => {
+      if (state.isCheckedAll) {
+        item.checked = true
         state.checkboxList.push(item.id)
-      })
-    } else {
-      state.checkboxList = []
-    }
+      } else {
+        item.checked = false
+        state.checkboxList = []
+      }
+    })
   }
 }
 const getters = {
-  getGoodsmoney (state) {
+  getGoodmoney (state) {
     let money = 0
     state.cur.forEach((item) => {
-      state.checkboxList.filter((checkId) => {
-        if (checkId === item.id) {
+      state.checkboxList.filter((Id) => {
+        if (Id === item.id) {
           money += item.price * item.num
         }
       })
-    })
-    return money
-  },
-  getGoodtotal (state) {
-    let money = 0
-    state.cur.forEach((item) => {
-      money += item.price * item.num
     })
     return money
   }

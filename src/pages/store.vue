@@ -67,6 +67,7 @@ export default {
       datas: null,
       lists: null,
       curNav: 0,
+      checkedNames: [],
       storeData: {
         data: [
           {
@@ -133,6 +134,9 @@ export default {
     },
     jump () {
       this.$router.push('/pages/detail')
+    },
+    checkboxChange (e) {
+      console.log('checkbox发生change事件，携带value值为：' + this.list)
     }
   },
 

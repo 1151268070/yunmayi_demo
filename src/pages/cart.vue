@@ -3,7 +3,7 @@
       <div class="front">
         <van-row>
           <van-col span="12">
-            <p>共{{cur.length}}件商品</p>
+            <p>选中{{num}}件商品</p>
           </van-col>
           <van-col span="12" style="text-align: right">
             <van-button type="danger" size="mini" class="s-button">管理</van-button>
@@ -12,8 +12,8 @@
       </div>
       <div v-if="!cur.length">购物车空空的</div>
       <div v-else class="list">
-        <div v-for="(item, index) in cur" :key="index">
-          <van-checkbox :value="checkboxList" @change="onChange">
+          <div v-for="(item, index) in cur" :key="index">
+            <checkbox :value="item.id" :checked="item.checked"  @click="onChange(index)"/>
             <van-card
               :title="item.name"
               :price="item.price"
@@ -27,15 +27,14 @@
                 <van-stepper min="1" :value="item.num" integer @plus="addNum({id: item.id})" @minus="reduceNum({id: item.id})"/>
               </view>
             </van-card>
-          </van-checkbox>
-        </div>
+          </div>
       </div>
       <div>
         <van-submit-bar
-          :price="getGoodtotal * 100"
+          :price="getGoodmoney * 100"
           button-text="结算"
         >
-          <van-checkbox class="checkBox" :value="isCheckedAll" @change="onCheckedAll">全选</van-checkbox>
+          <input class="checkBox" type="checkbox" :checked="isCheckedAll" @click="onCheckedAll" />全选
         </van-submit-bar>
       </div>
     </div>
@@ -47,21 +46,17 @@
     name: 'cart',
     data () {
       return {
-        checked: true
       }
     },
     methods: {
-      ...mapActions(['addNum', 'reduceNum', 'onChange', 'onCheckedAll']),
-      onChange () {
-        this.checked = !this.checked
-      }
+      ...mapActions(['addNum', 'reduceNum', 'onChange', 'onCheckedAll', 'initCur'])
     },
     computed: {
-      ...mapState(['cur', 'checkboxList', 'isCheckedAll']),
-      ...mapGetters(['getGoodtotal'])
+      ...mapState(['cur', 'isCheckedAll', 'num']),
+      ...mapGetters(['getGoodmoney'])
     },
     created () {
-      // this.initCur()
+      this.initCur()
     }
   }
 </script>
