@@ -3,10 +3,10 @@
       <div class="front">
         <van-row>
           <van-col span="12">
-            <p>选中{{num}}件商品</p>
+            <p>选中{{checkboxList.length}}件商品</p>
           </van-col>
           <van-col span="12" style="text-align: right">
-            <van-button type="danger" size="mini" class="s-button">管理</van-button>
+            <van-button type="danger" size="mini" class="s-button" @click="del">删除</van-button>
           </van-col>
         </van-row>
       </div>
@@ -33,14 +33,17 @@
         <van-submit-bar
           :price="getGoodmoney * 100"
           button-text="结算"
+          @submit="onSubmit"
         >
           <input class="checkBox" type="checkbox" :checked="isCheckedAll" @click="onCheckedAll" />全选
         </van-submit-bar>
       </div>
+      <van-notify id="van-notify" />
     </div>
 </template>
 
 <script>
+  import Notify from '@/../static/vant/notify/notify'
   import {mapState, mapActions, mapGetters} from 'vuex'
   export default {
     name: 'cart',
@@ -49,10 +52,17 @@
       }
     },
     methods: {
-      ...mapActions(['addNum', 'reduceNum', 'onChange', 'onCheckedAll', 'initCur'])
+      ...mapActions(['addNum', 'reduceNum', 'onChange', 'onCheckedAll', 'initCur', 'del']),
+      onSubmit () {
+        if (this.$store.state.checkboxList.length > 0) {
+          this.$router.push('/pages/confirm')
+        } else {
+          Notify('请勾选需要的商品')
+        }
+      }
     },
     computed: {
-      ...mapState(['cur', 'isCheckedAll', 'num']),
+      ...mapState(['cur', 'isCheckedAll', 'checkboxList']),
       ...mapGetters(['getGoodmoney'])
     },
     created () {

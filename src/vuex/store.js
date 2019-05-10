@@ -54,6 +54,12 @@ const actions = {
     if (result === 'ok') {
       commit('onCheckedAll', params)
     }
+  },
+  del ({commit}, params) {
+    let result = 'ok'
+    if (result === 'ok') {
+      commit('del', params)
+    }
   }
 }
 const mutations = {
@@ -95,13 +101,17 @@ const mutations = {
     }
   },
   //  单选
-  onChange (state, i) {
-    state.cur[i].checked = !state.cur[i].checked
-    // if (state.cur[i].checked) {
-    //   state.checkboxList.push(state.cur[i])
-    // } else {
-    //   return false
-    // }
+  onChange (state, j) {
+    state.cur[j].checked = !state.cur[j].checked
+    if (state.cur[j].checked) {
+      state.checkboxList.push(state.cur[j].id)
+    } else {
+      for (var i = 0; i < state.checkboxList.length; i++) {
+        if (state.checkboxList[i] === state.cur[j].id) {
+          state.checkboxList.splice(i, 1)
+        }
+      }
+    }
     if (state.cur.every(item => item.checked) === true) {
       state.isCheckedAll = true
     } else {
@@ -121,6 +131,18 @@ const mutations = {
         state.checkboxList = []
       }
     })
+  },
+  // 删除
+  del (state) {
+    console.log(111)
+    for (var i = 0; i < state.cur.length; i++) {
+      state.checkboxList.filter((Id) => {
+        if (Id === state.cur[i].id) {
+          state.cur.splice(i, 1)
+          state.checkboxList.splice(i, 1)
+        }
+      })
+    }
   }
 }
 const getters = {
