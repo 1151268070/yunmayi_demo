@@ -76,7 +76,6 @@
         this.show = false
       },
       Show () {
-        console.log(1111)
         this.show = true
       },
       ok (index) {
