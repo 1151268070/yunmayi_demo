@@ -137,11 +137,19 @@ export default {
     },
     checkboxChange (e) {
       console.log('checkbox发生change事件，携带value值为：' + this.list)
+    },
+    styem () {
+      wx.getSystemInfoSync({
+        success (res) {
+          console.log('设备品牌:', res.brand)
+          console.log('设备型号:', res.model)
+        }
+      })
     }
   },
 
   mounted () {
-
+    this.styem()
   }
 
 }

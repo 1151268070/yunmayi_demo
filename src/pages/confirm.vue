@@ -48,9 +48,9 @@
             </van-col>
           </van-row>
         </div>
-        <van-radio-group :value="radio">
-          <van-radio name="1"></van-radio>
-          <van-radio name="2"></van-radio>
+        <van-radio-group :value="radios">
+          <van-radio name="1">111</van-radio>
+          <van-radio name="2">111</van-radio>
         </van-radio-group>
       </div>
       <div class="address">
@@ -72,21 +72,17 @@
       <div>
         <van-popup :show="hide" position="bottom" @close="onClose">
           <div>1111111</div>
-          <van-radio-group :value="radio">
+          <van-radio-group value="1">
             <div class="item">
-              <van-row>
-                <van-col span="20">
-                  <p style="padding:20px 0px 10px 10px; font-size: 22px; color: white; line-height: 35px;">¥5
-                    <span style="font-size: 14px">满30可用</span>
-                  </p>
-                  <p style="padding:0px 0px 10px 10px; color: white; font-size: 14px; line-height: 35px;">有效期至2020-01-01 00:00:00</p>
-                </van-col>
-                <van-col span="4">
-                  <div style="background: white; width: 50px; height: 50px;">
-                    <van-raido class="new_radio" name="1" checked-color="#07c160"></van-raido>
-                  </div>
-                </van-col>
-              </van-row>
+              <div class="left">
+                <p style="padding:20px 0px 10px 10px; font-size: 22px; color: white; line-height: 35px;">¥5
+                  <span style="font-size: 14px">满30可用</span>
+                </p>
+                <p style="padding:0px 0px 10px 10px; color: white; font-size: 14px; line-height: 35px;">有效期至2020-01-01 00:00:00</p>
+              </div>
+              <div class="right">
+                <van-raido class="new_radio" name="1" checked-color="#07c160"></van-raido>
+              </div>
             </div>
           </van-radio-group>
           <div class="zero"></div>
@@ -113,7 +109,8 @@
       return {
         text: '',
         hide: false,
-        checked: false
+        checked: false,
+        radios: 1
       }
     },
     methods: {
@@ -159,10 +156,19 @@
   height: 100px;
 }
 .item{
+  display: flex;
   padding: 5rpx;
   border-radius: 5px;
-  background: rgb(116,210,212);
   margin: 0 auto;
+  width: 100%;
+
+}
+.item .left{
+  width: 80%;
+  background: rgb(116,210,212);
+}
+.item .right{
+  flex: 2
 }
 .new_radio{
   z-index: 99;

@@ -1,6 +1,7 @@
 // vuex/store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Notify from '@/../static/vant/notify/notify'
 Vue.use(Vuex)
 
 const state = {
@@ -69,6 +70,11 @@ const mutations = {
     })
   },
   onClickButton (state, { id, name, imgUrl, price }) {
+    Notify({
+      text: '加入购物车成功',
+      duration: 1000,
+      backgroundColor: '#00FF00'
+    })
     let isOwn = state.cur.some(function (item) {
       if (item.id === id) {
         item.num++

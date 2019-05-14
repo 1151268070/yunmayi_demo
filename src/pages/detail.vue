@@ -37,6 +37,7 @@
           <van-goods-action-button text="立即购买" @click="buy" />
         </van-goods-action>
       </div>
+      <van-notify id="van-notify"/>
     </div>
 </template>
 
