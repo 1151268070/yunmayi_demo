@@ -7,7 +7,9 @@
           <van-tabbar-item icon="apps-o" @click="Show">分类</van-tabbar-item>
         </van-col>
         <van-col span="18">
-          <van-search placeholder="请输入关键字搜索" @search="onSearch"/>
+          <van-search :value="values" placeholder="请输入关键字搜索" use-action-slot>
+            <view slot="action" @click="onSearch">搜索</view>
+          </van-search>
         </van-col>
         <van-col span="3">
           <p style="margin-top: 10px"></p>
@@ -48,7 +50,8 @@
     data () {
       return {
         show: false,
-        num: -1
+        num: -1,
+        values: null
       }
     },
     components: {
@@ -70,7 +73,8 @@
     // },
     methods: {
       onSearch () {
-        this.$router.push('/pages/search')
+        console.log(this.value)
+        // this.$router.push('/pages/search')
       },
       onClose () {
         this.show = false

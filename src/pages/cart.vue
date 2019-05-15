@@ -12,21 +12,25 @@
       </div>
       <div v-if="!cur.length">购物车空空的</div>
       <div v-else class="list">
-          <div v-for="(item, index) in cur" :key="index">
-            <checkbox :value="item.id" :checked="item.checked"  @click="onChange(index)"/>
-            <van-card
-              :title="item.name"
-              :price="item.price"
-              :thumb="item.imgUrl"
-            >
-              <view slot="tags">
-                <span>红色</span>
-                <span>M</span>
-              </view>
-              <view slot="footer">
-                <van-stepper min="1" :value="item.num" integer @plus="addNum({id: item.id})" @minus="reduceNum({id: item.id})"/>
-              </view>
-            </van-card>
+          <div v-for="(item, index) in cur" :key="index" style="display: flex">
+            <div style="width: 10%;">
+              <checkbox :value="item.id" :checked="item.checked"  @click="onChange(index)"/>
+            </div>
+            <div style="flex: 2">
+              <van-card
+                :title="item.name"
+                :price="item.price"
+                :thumb="item.imgUrl"
+              >
+                <view slot="tags">
+                  <span>红色</span>
+                  <span>M</span>
+                </view>
+                <view slot="footer">
+                  <van-stepper min="1" :value="item.num" integer @plus="addNum({id: item.id})" @minus="reduceNum({id: item.id})"/>
+                </view>
+              </van-card>
+            </div>
           </div>
       </div>
       <div>
