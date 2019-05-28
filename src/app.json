@@ -189,7 +189,9 @@
           "van-goods-action": "/static/vant/goods-action/index",
           "van-goods-action-icon": "/static/vant/goods-action-icon/index",
           "van-goods-action-button": "/static/vant/goods-action-button/index",
-          "van-notify": "/static/vant/notify/index"
+          "van-notify": "/static/vant/notify/index",
+          "van-popup": "/static/vant/popup/index",
+          "van-stepper": "/static/vant/stepper/index"
         }
       }
     },

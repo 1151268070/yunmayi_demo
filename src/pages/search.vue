@@ -50,6 +50,7 @@
     name: 'search',
     data () {
       return {
+        text: this.$router.kw,
         storeData: {
           data: [
             {

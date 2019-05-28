@@ -8,13 +8,25 @@
       </div>
       <div class="address">
         <p class="listfile" >商品列表：</p>
-        <div style="border-bottom: 1px solid #ddd; margin-bottom: 10rpx;" v-for="(item, index) in cur" :key="index">
+        <div v-if="list.length === 0" style="border-bottom: 1px solid #ddd; margin-bottom: 10rpx;" v-for="(item, index) in cur" :key="index">
           <van-card
             :num="item.num"
             :price="item.price"
             :title="item.name"
             :thumb="item.imgUrl"
           />
+        </div>
+        <div v-if="list.length != 0" style="border-bottom: 1px solid #ddd; margin-bottom: 10rpx;" v-for="(item, index) in list" :key="index">
+          <van-card
+            :num="item.num"
+            :price="item.price/100"
+            :title="item.name"
+            :thumb="'http://i8.yunmayi.com'+ item.imgUrl + 'XXXXX!!!!!_160x160.jpg'"
+          >
+            <view slot="desc">
+              <p style="font-size: 24rpx;">{{item.hintMessage}}</p>
+            </view>
+          </van-card>
         </div>
       </div>
       <div class="address">
@@ -44,7 +56,8 @@
               <span style="padding-left: 20rpx; font-size: 30rpx; color: #535353">商品金额</span>
             </van-col>
             <van-col span="12" style="text-align: right">
-              <span style="padding-right: 20rpx; font-size: 30rpx; color: #EF473A;">¥ {{getGoodmoney}}</span>
+              <span v-if="list.length === 0" style="padding-right: 20rpx; font-size: 30rpx; color: #EF473A;">¥ {{getGoodmoney}}</span>
+              <span style="padding-right: 20rpx; font-size: 30rpx; color: #EF473A;">¥ {{computedMoney/100}}</span>
             </van-col>
           </van-row>
         </div>
@@ -91,10 +104,16 @@
       <div class="zero">
       </div>
       <div>
-        <van-submit-bar
+        <van-submit-bar v-if="list.length === 0"
           :price="getGoodmoney * 100"
           button-text="提交订单"
           @submit="onSubmit"
+        >
+        </van-submit-bar>
+        <van-submit-bar v-if="list.length != 0"
+            :price="computedConfrimMoney"
+            button-text="提交订单"
+            @submit="onSubmit"
         >
         </van-submit-bar>
       </div>
@@ -110,7 +129,8 @@
         text: '',
         hide: false,
         checked: false,
-        radios: 1
+        radios: 1,
+        original: 0
       }
     },
     methods: {
@@ -125,11 +145,19 @@
       }
     },
     computed: {
-      ...mapState(['cur', 'checkboxList']),
-      ...mapGetters(['getGoodmoney'])
+      ...mapState(['cur', 'checkboxList', 'list']),
+      ...mapGetters(['getGoodmoney']),
+      computedMoney () {
+        this.original = this.$store.state.list[0].price * this.$store.state.list[0].num
+        return this.original.toFixed(2)
+      },
+      computedConfrimMoney () {
+        let money = 0
+        money = this.original - 0
+        return money
+      }
     },
     created () {
-      console.log(this.hide)
     }
   }
 </script>

@@ -19,12 +19,11 @@
             <div style="flex: 2">
               <van-card
                 :title="item.name"
-                :price="item.price"
-                :thumb="item.imgUrl"
+                :price="item.price/100"
+                :thumb="'http://i8.yunmayi.com'+ item.imgUrl + 'XXXXX!!!!!_160x160.jpg'"
               >
-                <view slot="tags">
-                  <span>红色</span>
-                  <span>M</span>
+                <view slot="desc">
+                  <p style="font-size: 24rpx;">{{item.hintMessage}}</p>
                 </view>
                 <view slot="footer">
                   <van-stepper min="1" :value="item.num" integer @plus="addNum({id: item.id})" @minus="reduceNum({id: item.id})"/>
@@ -35,7 +34,7 @@
       </div>
       <div>
         <van-submit-bar
-          :price="getGoodmoney * 100"
+          :price="getGoodmoney"
           button-text="结算"
           @submit="onSubmit"
         >

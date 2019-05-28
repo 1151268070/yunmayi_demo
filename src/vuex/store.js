@@ -6,8 +6,9 @@ Vue.use(Vuex)
 
 const state = {
   cur: [
-    {id: 2, price: 30, imgUrl: 'http://i8.yunmayi.com/upload/2018/11/29/4c03843b417ea4abad1d2272fd41071f.pngXXXXX!!!!!_160x160.jpg', name: '手工麦芽糖营养糕核桃红枣枸杞黑芝麻麦芽营养糕批发SC7', num: 1}
+    {id: 2, price: 3000, imgUrl: '/upload/2018/11/29/4c03843b417ea4abad1d2272fd41071f.png', name: '手工麦芽糖营养糕核桃红枣枸杞黑芝麻麦芽营养糕批发SC7', num: 1}
   ],
+  list: [],
   checkboxList: [],
   isCheckedAll: false
 }
@@ -17,6 +18,14 @@ const actions = {
       let result = 'ok'
       if (result === 'ok') {
         commit('initCur', params)
+      }
+    }, 300)
+  },
+  onConfirm ({commit}, params) {
+    setTimeout(() => {
+      let result = 'ok'
+      if (result === 'ok') {
+        commit('onConfirm', params)
       }
     }, 300)
   },
@@ -69,7 +78,14 @@ const mutations = {
       item.checked = false
     })
   },
-  onClickButton (state, { id, name, imgUrl, price }) {
+  onConfirm (state, {id, name, imgUrl, price, num, hintMessage}) {
+    state.list = []
+    state.list.push({id, name, imgUrl, price, num, hintMessage})
+    wx.navigateTo({
+      url: '/pages/confirm'
+    })
+  },
+  onClickButton (state, { id, name, imgUrl, price, num, hintMessage }) {
     Notify({
       text: '加入购物车成功',
       duration: 1000,
@@ -77,14 +93,14 @@ const mutations = {
     })
     let isOwn = state.cur.some(function (item) {
       if (item.id === id) {
-        item.num++
+        item.num += num
         return true
       } else {
         return false
       }
     })
     if (!isOwn) {
-      state.cur.push({ id, name, price, imgUrl, num: 1 })
+      state.cur.push({id, name, price, imgUrl, num: num, hintMessage})
     }
   },
   addNum (state, { id }) {
