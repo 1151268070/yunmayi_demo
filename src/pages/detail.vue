@@ -64,8 +64,8 @@
             <p style="float: right; padding-right: 60rpx;"><van-stepper :value="quantity" @change="onChange"/></p>
           </div>
           <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
-            <van-button v-if="pattern === 1" type="danger" size="large" @click="onClickButton({id: data.id, imgUrl: data.imgUrl, price: data.sellPrice, num: quantity, hintMessage: hintMessage, name: data.title})">确定</van-button>
-            <van-button v-if="pattern === 2" type="danger" size="large" @click="onConfirm({id: data.id, imgUrl: data.imgUrl, price: data.sellPrice, num: quantity, hintMessage: hintMessage, name: data.title})">确定</van-button>
+            <van-button v-if="pattern === 1" type="danger" size="large" @click="onClickButton({id: data.id, imgUrl: data.imgUrl, price: data.sellPrice, num: quantity, hintMessage: hintMessage, name: data.title}); onClose()">确定</van-button>
+            <van-button v-if="pattern === 2" type="danger" size="large" @click="onConfirm({id: data.id, imgUrl: data.imgUrl, price: data.sellPrice, num: quantity, hintMessage: hintMessage, name: data.title}); onClose()">确定</van-button>
           </div>
         </div>
       </van-popup>

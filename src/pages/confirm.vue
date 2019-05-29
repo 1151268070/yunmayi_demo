@@ -11,12 +11,16 @@
         <div v-if="list.length === 0" style="border-bottom: 1px solid #ddd; margin-bottom: 10rpx;" v-for="(item, index) in cur" :key="index">
           <van-card
             :num="item.num"
-            :price="item.price"
+            :price="item.price/100"
             :title="item.name"
-            :thumb="item.imgUrl"
-          />
+            :thumb="'http://i8.yunmayi.com' + item.imgUrl + 'XXXXX!!!!!_160x160.jpg'"
+          >
+            <view slot="desc">
+              <p style="font-size: 24rpx;">{{item.hintMessage}}</p>
+            </view>
+          </van-card>
         </div>
-        <div v-if="list.length != 0" style="border-bottom: 1px solid #ddd; margin-bottom: 10rpx;" v-for="(item, index) in list" :key="index">
+        <div v-if="list.length !== 0" style="border-bottom: 1px solid #ddd; margin-bottom: 10rpx;" v-for="(item, index) in list" :key="index">
           <van-card
             :num="item.num"
             :price="item.price/100"
@@ -44,7 +48,8 @@
               placeholder="请输入留言"
               :value="text"
               autosize
-            />
+            >
+            </van-field>
           </van-cell-group>
         </div>
       </div>
@@ -56,15 +61,10 @@
               <span style="padding-left: 20rpx; font-size: 30rpx; color: #535353">商品金额</span>
             </van-col>
             <van-col span="12" style="text-align: right">
-              <span v-if="list.length === 0" style="padding-right: 20rpx; font-size: 30rpx; color: #EF473A;">¥ {{getGoodmoney}}</span>
-              <span style="padding-right: 20rpx; font-size: 30rpx; color: #EF473A;">¥ {{computedMoney/100}}</span>
+              <span style="padding-right: 20rpx; font-size: 30rpx; color: #EF473A;">¥ {{original/100}}</span>
             </van-col>
           </van-row>
         </div>
-        <van-radio-group :value="radios">
-          <van-radio name="1">111</van-radio>
-          <van-radio name="2">111</van-radio>
-        </van-radio-group>
       </div>
       <div class="address">
         <p class="listfile">购物券 <span @click="select_coupon">4张 > ></span></p>
@@ -80,11 +80,11 @@
         </div>
       </div>
       <div class="address">
-        <van-switch-cell title="可用0蚂蚁金币抵用0.00元" :checked="checked" @change="onSwitch"></van-switch-cell>
+        <van-switch-cell :disabled="goldCash === 0" :title="'可用'+ goldCash/100 + '蚂蚁金币抵用' + goldCash/100 +'元'" :checked="checked" @change="onSwitch(1)"></van-switch-cell>
+        <van-switch-cell :disabled="checked === false" :title="'可用'+ integral + '积分抵用'+ integral/1000 + '元'" :checked="selected" @change="onSwitch(2)"></van-switch-cell>
       </div>
       <div>
         <van-popup :show="hide" position="bottom" @close="onClose">
-          <div>1111111</div>
           <van-radio-group value="1">
             <div class="item">
               <div class="left">
@@ -104,16 +104,10 @@
       <div class="zero">
       </div>
       <div>
-        <van-submit-bar v-if="list.length === 0"
-          :price="getGoodmoney * 100"
+        <van-submit-bar
+          :price="constPrice"
           button-text="提交订单"
           @submit="onSubmit"
-        >
-        </van-submit-bar>
-        <van-submit-bar v-if="list.length != 0"
-            :price="computedConfrimMoney"
-            button-text="提交订单"
-            @submit="onSubmit"
         >
         </van-submit-bar>
       </div>
@@ -129,8 +123,16 @@
         text: '',
         hide: false,
         checked: false,
+        selected: false,
         radios: 1,
-        original: 0
+        original: 0,
+        goldCashs: 2990, //  总蚂蚁金币
+        goldCash: 0,
+        integral: 0, //  积分
+        integrals: 0, //  总积分
+        constPrice: 0, // 最终价格,
+        gold: 0, // 临时储存
+        inte: 0
       }
     },
     methods: {
@@ -140,24 +142,65 @@
       onClose () {
         this.hide = false
       },
-      onSwitch () {
-        this.checked = !this.checked
+      onSwitch (i) {
+        if (i === 1) {
+          this.checked = !this.checked
+        } else {
+          this.selected = !this.selected
+        }
+        this.computedgetGoodmoney()
+      },
+      computedMoney () {
+        if (this.$store.state.list.length !== 0) {
+          this.original = this.$store.state.list[0].price * this.$store.state.list[0].num
+          this.integral = this.$store.state.list[0].price * 3
+          this.integrals = this.integral
+        } else {
+          this.original = this.$store.getters.getGoodmoney
+          for (var i = 0; i < this.$store.state.cur.length; i++) {
+            this.integral += this.$store.state.cur[i].price * 3
+          }
+          this.integrals = this.integral
+        }
+      },
+      computedgetGoodmoney () {
+        this.gold = 0
+        this.inte = 0
+        if (this.original <= 0) {
+          this.goldCash = 0
+          this.integral = 0
+        } else {
+          if (this.checked) {
+            this.gold = this.goldCash
+            if (this.original <= this.goldCashs) {
+              this.integral = 0
+            } else if (this.integrals / 10 > this.original - this.goldCashs) {
+              this.integral = (this.original - this.goldCashs) * 10
+            }
+          } else {
+            this.integral = this.integrals
+          }
+          if (this.selected) {
+            this.inte = this.integral
+            if (this.goldCashs > this.original - this.integral / 10) {
+              this.goldCash = this.original - this.integral / 10
+            }
+          } else {
+            this.goldCash = Math.min(this.original, this.goldCashs)
+          }
+        }
+        this.constPrice = (this.original - this.gold - this.inte / 10) < 0 ? 0 : (this.original - this.gold - this.inte / 10)
       }
     },
     computed: {
       ...mapState(['cur', 'checkboxList', 'list']),
-      ...mapGetters(['getGoodmoney']),
-      computedMoney () {
-        this.original = this.$store.state.list[0].price * this.$store.state.list[0].num
-        return this.original.toFixed(2)
-      },
-      computedConfrimMoney () {
-        let money = 0
-        money = this.original - 0
-        return money
-      }
+      ...mapGetters(['getGoodmoney'])
     },
     created () {
+    },
+    onShow () {
+      this.computedMoney()
+      this.computedgetGoodmoney()
     }
   }
 </script>
